@@ -62,5 +62,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+console.log(process.env.DATABASE_URL)
 
 module.exports = app;
