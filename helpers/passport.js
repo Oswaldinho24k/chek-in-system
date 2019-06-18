@@ -5,11 +5,13 @@ const bcrypt = require('bcryptjs');
 
 
 
-passport.use(new LocalStrategy(
-  (email, password, done) => {    
 
-    queries.getOneBy('email', email)
-    .then((user)=>{        
+passport.use(new LocalStrategy({
+  usernameField:'email'
+},
+  (username, password, done) => {        
+    queries.getOneBy('email', username)
+    .then((user)=>{           
         if (!user) return done(null, false, { message: 'Incorrect email.' });
         if (!bcrypt.compareSync(password, user.password)) return next(null, false, { message: "Incorrect password" });
         return done(null, user);
@@ -21,10 +23,19 @@ passport.use(new LocalStrategy(
   }
 ));
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
+
+passport.serializeUser((user, done) =>{
+  done(null, user.id);
 });
+
+passport.deserializeUser((id, done) =>{
+  queries.getOne(id)
+    .then((user)=>{   
+      done(null, user);
+    })
+    .catch((err)=>{        
+        return done(err);
+    })  
   
-passport.deserializeUser(function(user, done) {
-done(null, user);
 });
+

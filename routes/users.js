@@ -8,6 +8,7 @@ var bcrypt = require('bcryptjs');
 //login
 router.post('/login', (req, res, next) =>{
   passport.authenticate('local', (err, user, info)=> {
+    console.log(user, info, err)
     if (err) { 
       console.log(err)
       return res.json(err); 
@@ -17,7 +18,7 @@ router.post('/login', (req, res, next) =>{
       if (err) { 
         console.log(err)
         return json(err); 
-      }
+      }      
       return res.json(user)
     });
   })(req, res, next);
