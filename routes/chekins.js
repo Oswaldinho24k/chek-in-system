@@ -37,7 +37,7 @@ router.patch('/:id', (req, res, next)=>{
 })
 
 //delete chekin
-router.get('/:id', (req, res, next)=>{  
+router.delete('/:id', (req, res, next)=>{  
   const {id} = req.params
   queries.delete(id)
     .then((chekin)=>res.status(200).json(chekin))

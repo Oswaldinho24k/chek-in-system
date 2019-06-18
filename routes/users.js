@@ -65,7 +65,7 @@ router.patch('/:id', (req, res, next)=>{
 })
 
 //delete user
-router.get('/:id', (req, res, next)=>{  
+router.delete('/:id', (req, res, next)=>{  
   const {id} = req.params
   queries.delete(id)
     .then((user)=>res.status(200).json(user))

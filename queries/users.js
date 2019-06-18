@@ -3,11 +3,11 @@ const knex = require('../db/knex');
 module.exports = {
   getAll: () => {
     return knex('users')
-            .select('id', 'username', 'email', 'phone', 'imageURL');
+            .select('id', 'username', 'email', 'phone', 'imageURL', 'isAdmin');
   },
   getOne: (id) => {
     return knex('users')
-            .select('id', 'username', 'email', 'phone', 'imageURL')
+            .select('id', 'username', 'email', 'phone', 'imageURL', 'isAdmin')
             .where('id', id)
             .first();
   },
