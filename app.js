@@ -16,6 +16,7 @@ require('./helpers/passport')
 //routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const chekinsRouter = require('./routes/chekins');
 
 
 const app = express();
@@ -46,6 +47,7 @@ app.use(
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/chekins', chekinsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,6 +64,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-console.log(process.env.DATABASE_URL)
 
 module.exports = app;

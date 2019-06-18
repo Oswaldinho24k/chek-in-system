@@ -12,6 +12,7 @@ exports.up = (knex, Promise) => {
         table.string('email').unique().notNullable()
         table.string('password').notNullable()
         table.string('phone')
+        table.boolean('isAdmin').defaultTo('false')
         table.string('imageURL').defaultTo('http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png')        
     });
   };

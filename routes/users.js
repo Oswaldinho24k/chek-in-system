@@ -34,17 +34,42 @@ router.post('/signup', (req, res, next)=>{
     .catch((error)=>res.status(400).json(error))
 })
 
+//log out
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.json({message:'Logued out successfully'})
+});
+
 //get all users
 router.get('/', (req, res, next)=>{  
   queries.getAll()
-    .then((user)=>res.status(201).json(user))
+    .then((user)=>res.status(200).json(user))
     .catch((error)=>res.status(400).json(error))
 })
 
 //get single user
+router.get('/:id', (req, res, next)=>{
+  const {id} = req.params
+  queries.getOne(id)
+    .then((user)=>res.status(200).json(user))
+    .catch((error)=>res.status(400).json(error))
+})
 
 //update user
+router.patch('/:id', (req, res, next)=>{
+  const {id} = req.params
+  const user = req.body
+  queries.update(id, user)
+    .then((user)=>res.status(200).json(user))
+    .catch((error)=>res.status(400).json(error))
+})
 
 //delete user
+router.get('/:id', (req, res, next)=>{  
+  const {id} = req.params
+  queries.delete(id)
+    .then((user)=>res.status(200).json(user))
+    .catch((error)=>res.status(400).json(error))
+})
 
 module.exports = router;

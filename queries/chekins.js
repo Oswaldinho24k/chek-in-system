@@ -8,17 +8,19 @@ module.exports = {
   getOne: (id) => {
     return knex('chekins')
             .select()
-            .where('id', id)
+            .where('id', id)            
             .first();
   },
   create: (chekin) => {
     return knex('chekins')
-            .insert(chekin, 'id');
+            .insert(chekin, 'id')
+            .returning('*');
   },
   update: (id, chekin) => {
     return knex('chekins')
             .where('id', id)
-            .update(chekin, 'id');
+            .update(chekin, 'id')
+            .returning('*');
   },
   delete: (id) => {
     return knex('chekins')
