@@ -1,13 +1,13 @@
 const knex = require('../db/knex');
 
 module.exports = {
-  getAll: () => {
-    return knex('chekins')
-            .select();
+  getAll: (user) => {
+    if(user)return knex('chekins').select().leftJoin('users', 'chekins.user', 'users.id').where('user',user);
+    return knex('chekins').select().leftJoin('users', 'chekins.user', 'users.id');
   },
   getOne: (id) => {
     return knex('chekins')
-            .select()
+            .select()            
             .where('id', id)            
             .first();
   },

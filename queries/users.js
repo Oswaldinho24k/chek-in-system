@@ -3,7 +3,7 @@ const knex = require('../db/knex');
 module.exports = {
   getAll: () => {
     return knex('users')
-            .select();
+            .select()
   },
   getOne: (id) => {
     return knex('users')

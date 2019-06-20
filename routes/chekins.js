@@ -13,8 +13,9 @@ router.post('/', (req, res, next)=>{
   })
 
 //get all chekins
-router.get('/', (req, res, next)=>{  
-  queries.getAll()
+router.get('/', (req, res, next)=>{
+  const {user} = req.params
+  queries.getAll(user)
     .then((chekin)=>res.status(200).json(chekin))
     .catch((error)=>res.status(400).json(error))
 })
