@@ -13,7 +13,7 @@ passport.use(new LocalStrategy({
     queries.getOneBy('email', username)
     .then((user)=>{           
         if (!user) return done(null, false, { message: 'Incorrect email.' });
-        if (!bcrypt.compareSync(password, user.password)) return next(null, false, { message: "Incorrect password" });
+        if (!bcrypt.compareSync(password, user.password)) return done(null, false, { message: "Incorrect password" });
         return done(null, user);
     })
     .catch((err)=>{

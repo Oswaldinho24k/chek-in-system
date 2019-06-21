@@ -9,17 +9,11 @@ const {welcomeMail} = require('../helpers/mailer')
 //login
 router.post('/login', (req, res, next) =>{
   passport.authenticate('local', (err, user, info)=> {
-    console.log(user, info, err)
-    if (err) { 
-      console.log(err)
-      return res.json(err); 
-    }
-    if (!user) { return res.json({message:'This user does not exist'}); }
+    console.log(user, info, err)    
+    if (info) return res.status(400).json(info);         
+    if (!user) return res.status(404).json({message:'This user does not exist'});
     req.logIn(user, (err) =>{
-      if (err) { 
-        console.log(err)
-        return json(err); 
-      }      
+      if (err) return res.status(400).json(err);       
       return res.json(user)
     });
   })(req, res, next);
