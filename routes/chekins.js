@@ -5,8 +5,7 @@ const queries = require('../queries/chekins');
 
 
 //post a chekin
-router.post('/', (req, res, next)=>{
-    
+router.post('/', (req, res, next)=>{    
     queries.create(req.body)
       .then((chekin)=>res.status(201).json(chekin))
       .catch((error)=>res.status(400).json(error))

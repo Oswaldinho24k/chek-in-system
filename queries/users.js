@@ -8,8 +8,7 @@ module.exports = {
   getOne: (id) => {
     return knex('users')
             .select()
-            .where('id', id)
-            .first();
+            .where('id', id)            
   },
   getOneBy: (filter,value) => {
     return knex('users')
