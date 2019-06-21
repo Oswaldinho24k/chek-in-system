@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const queries = require('../queries/users');
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
+const {welcomeMail} = require('../helpers/mailer')
 
 
 //login
@@ -26,13 +27,19 @@ router.post('/login', (req, res, next) =>{
 
 //singup //create user
 router.post('/signup', (req, res, next)=>{
-  const user = req.body
+  const user = Object.assign({}, req.body)
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(user.password, salt);
   user.password = hash
   queries.create(user)
-    .then((user)=>res.status(201).json(user))
-    .catch((error)=>res.status(400).json(error))
+    .then((user)=>{
+      welcomeMail(req.body)
+      res.status(201).json(user)
+    })
+    .catch((error)=>{
+      console.log(error)
+      res.status(400).json(error)
+    })
 })
 
 //log out

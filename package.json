@@ -21,6 +21,7 @@
     "jade": "~1.11.0",
     "knex": "^0.17.6",
     "morgan": "~1.9.1",
+    "nodemailer": "^6.2.1",
     "npm": "^6.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

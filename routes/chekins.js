@@ -41,7 +41,7 @@ router.delete('/:id', (req, res, next)=>{
   const {id} = req.params
   queries.delete(id)
     .then((chekin)=>res.status(200).json(chekin))
-    .catch((error)=>res.status(400).json(error))
+    .catch((error)=>es.status(400).json(error))
 })
 
 module.exports = router;
